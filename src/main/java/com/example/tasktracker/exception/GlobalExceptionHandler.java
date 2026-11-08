@@ -41,7 +41,6 @@ public class GlobalExceptionHandler {
                             + "' нельзя передавать"
             );
         }
-
         return Map.of("error", "Некорректный JSON");
     }
 }
