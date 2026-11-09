@@ -1,11 +1,13 @@
 package com.example.tasktracker.service;
 
 import com.example.tasktracker.dto.TaskRequest;
+import com.example.tasktracker.exception.NoTasksSearchFoundException;
 import com.example.tasktracker.exception.TaskNotFoundException;
 import com.example.tasktracker.model.Task;
 import com.example.tasktracker.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -16,8 +18,11 @@ public class TaskService {
         this.repository = repository;
     }
 
-    public List<Task> findAllTasks(){
-        return repository.findAll();
+    public List<Task> findTasks(Boolean status){
+        if(status == null){
+            return repository.findAll();
+        }
+        return repository.findByDone(status);
     }
 
     public Task findById(Long id){
@@ -47,5 +52,18 @@ public class TaskService {
     public void deleteTask(Long id){
         Task task = findById(id);
         repository.delete(task);
+    }
+
+    public List<Task> searchTasks(String query) {
+
+        if (query == null || query.isBlank()) {
+            return Collections.emptyList();
+        }
+
+        List<Task> list = repository.findByTitleContainingIgnoreCase(query);
+        if(list.isEmpty()){
+            throw new NoTasksSearchFoundException(query);
+        }
+        return list;
     }
 }

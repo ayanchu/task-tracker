@@ -2,7 +2,6 @@ package com.example.tasktracker.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.method.MethodValidationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -43,4 +42,12 @@ public class GlobalExceptionHandler {
         }
         return Map.of("error", "Некорректный JSON");
     }
+
+    @ExceptionHandler(NoTasksSearchFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String,String> handleNoTasksFound(NoTasksSearchFoundException ex){
+        return Map.of("error", ex.getMessage());
+    }
+
+
 }

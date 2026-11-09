@@ -19,8 +19,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getAll(){
-        return service.findAllTasks();
+    public List<Task> getAll(@RequestParam(required = false) Boolean done){
+        return service.findTasks(done);
     }
 
     @GetMapping("/{id}")
@@ -52,4 +52,10 @@ public class TaskController {
     public void deleteTask(@PathVariable Long id){
         service.deleteTask(id);
     }
+
+    @GetMapping("/search")
+    public List<Task> searchTasks(@RequestParam String query){
+        return service.searchTasks(query);
+    }
+
 }
