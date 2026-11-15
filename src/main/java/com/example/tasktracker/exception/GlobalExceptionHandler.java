@@ -13,9 +13,9 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(TaskNotFoundException.class)
+    @ExceptionHandler(SerchedTaskNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String,String> handlerNotFound(TaskNotFoundException e){
+    public Map<String,String> handlerNotFound(SerchedTaskNotFoundException e){
         return Map.of("error",e.getMessage());
     }
 

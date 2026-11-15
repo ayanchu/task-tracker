@@ -2,7 +2,7 @@ package com.example.tasktracker.service;
 
 import com.example.tasktracker.dto.TaskRequest;
 import com.example.tasktracker.exception.NoTasksSearchFoundException;
-import com.example.tasktracker.exception.TaskNotFoundException;
+import com.example.tasktracker.exception.SerchedTaskNotFoundException;
 import com.example.tasktracker.model.Task;
 import com.example.tasktracker.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class TaskService {
     }
 
     public Task findById(Long id){
-        return repository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
+        return repository.findById(id).orElseThrow(() -> new SerchedTaskNotFoundException(id));
     }
 
     public Task createTask(TaskRequest req){
