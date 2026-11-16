@@ -69,6 +69,21 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>3.0.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-flyway</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -76,6 +91,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>11.10.4</version>
+				<configuration>
+					<user>tasktracker</user>
+					<password>tasktracker</password>
+					<url>jdbc:postgresql://localhost:5433/tasktracker</url>
+					<placeholders>
+						<seed_demo_data>true</seed_demo_data>
+						<build_timestamp>${env.BUILD_TS}</build_timestamp>
+					</placeholders>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
