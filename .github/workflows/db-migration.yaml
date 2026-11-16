@@ -30,7 +30,6 @@ jobs:
       FLYWAY_URL: jdbc:postgresql://localhost:5433/tasktracker
       FLYWAY_USER: tasktracker
       FLYWAY_PASSWORD: tasktracker
-      BUILD_TS: "${{ github.run_id }}-${{ github.run_attempt }}"
       FLYWAY_PLACEHOLDERS_BUILD_TIMESTAMP: "${{ github.run_id }}-${{ github.run_attempt }}"
     steps:
       - name: Checkout repository
